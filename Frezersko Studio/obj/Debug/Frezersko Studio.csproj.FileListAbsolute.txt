@@ -1,0 +1,16 @@
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\bin\Debug\Frezersko Studio.exe.config
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\bin\Debug\Frezersko Studio.exe
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\bin\Debug\Frezersko Studio.pdb
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko Studio.csprojResolveAssemblyReference.cache
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Properties.Resources.resources
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko Studio.csproj.GenerateResource.Cache
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko Studio.exe
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko Studio.pdb
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.mainForm.resources
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.customerForm.resources
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.employeeForm.resources
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.selectCustomer.resources
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.packageForm.resources
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.selectService.resources
+c:\users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.serviceForm.resources
+C:\Users\stefanprojchev\documents\visual studio 2012\Projects\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.selectPackage.resources
