@@ -34,3 +34,20 @@ C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frezersko Studio\
 C:\Users\Stefan Projchev\Desktop\Frezersko Studio\Frezersko Studio\bin\Debug\Frezersko Studio.exe.config
 C:\Users\Stefan Projchev\Desktop\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko Studio.exe
 C:\Users\Stefan Projchev\Desktop\Frezersko Studio\Frezersko Studio\obj\Debug\Frezersko Studio.pdb
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\bin\Debug\Frezersko Studio.exe.config
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko Studio.exe
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko Studio.pdb
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\bin\Debug\database.accdb
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\bin\Debug\Frezersko Studio.exe
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\bin\Debug\Frezersko Studio.pdb
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frizersko Studio.csprojResolveAssemblyReference.cache
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.selectCustomer.resources
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.customerForm.resources
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.employeeForm.resources
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.packageForm.resources
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.selectPackage.resources
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.selectService.resources
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Forms.serviceForm.resources
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.mainForm.resources
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frezersko_Studio.Properties.Resources.resources
+C:\Users\Stefan Projchev\Documents\Visual Studio 2012\Projects\Frizersko-Studio\Frezersko Studio\obj\Debug\Frizersko Studio.csproj.GenerateResource.Cache
