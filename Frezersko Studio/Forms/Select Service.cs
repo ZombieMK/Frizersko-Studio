@@ -23,12 +23,12 @@ namespace Frezersko_Studio.Forms
 
         private void selectService_Load(object sender, EventArgs e)
         {
-            OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=database.accdb;Persist Security Info=False;";
-            connection.Open();
+            Connection connection = new Connection();
+
+            connection.openConnection();
 
             OleDbCommand getServices = new OleDbCommand();
-            getServices.Connection = connection;
+            getServices.Connection = connection.connection;
             getServices.CommandText = "SELECT * FROM Services";
 
             OleDbDataReader servicesReader = getServices.ExecuteReader();
@@ -43,7 +43,7 @@ namespace Frezersko_Studio.Forms
             }
 
             OleDbCommand getEmployees = new OleDbCommand();
-            getEmployees.Connection = connection;
+            getEmployees.Connection = connection.connection;
             getEmployees.CommandText = "SELECT * FROM Employees";
 
             OleDbDataReader employeesReader = getEmployees.ExecuteReader();
@@ -64,7 +64,7 @@ namespace Frezersko_Studio.Forms
                     employeesList.Items.Add(tmpEmployee);
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             if (servicesList.Items.Count == 0) 
             {

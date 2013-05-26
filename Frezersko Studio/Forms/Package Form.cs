@@ -16,20 +16,20 @@ namespace Frezersko_Studio.Forms
     {
         public bool edit;
         public CPackage package;
+        public Connection connection;
 
         public packageForm()
         {
             InitializeComponent();
+            connection = new Connection();
         }
 
         private void packageForm_Load(object sender, EventArgs e)
         {
-            OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=database.accdb;Persist Security Info=False;";
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand getServices = new OleDbCommand();
-            getServices.Connection = connection;
+            getServices.Connection = connection.connection;
             getServices.CommandText = "SELECT * FROM Services";
 
             OleDbDataReader servicesReader = getServices.ExecuteReader();
@@ -43,7 +43,7 @@ namespace Frezersko_Studio.Forms
                 servicesList.Items.Add(tmpService);
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             if (edit)
             {
@@ -120,13 +120,10 @@ namespace Frezersko_Studio.Forms
                 services.Add(tmpService);
             }
 
-            OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=database.accdb;Persist Security Info=False;";
-
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand packageCommand = new OleDbCommand();
-            packageCommand.Connection = connection;
+            packageCommand.Connection = connection.connection;
 
             if (edit)
             {
@@ -139,7 +136,7 @@ namespace Frezersko_Studio.Forms
                 for (int i = 0; i < services.Count; i++)
                 {
                     OleDbCommand insertPackageService = new OleDbCommand();
-                    insertPackageService.Connection = connection;
+                    insertPackageService.Connection = connection.connection;
                     insertPackageService.CommandText = "INSERT INTO Package_Services (ID_Service, ID_Package) VALUES (" + services[i].id + ", " + package.id + ")";
 
                     insertPackageService.ExecuteNonQuery();
@@ -160,7 +157,7 @@ namespace Frezersko_Studio.Forms
                 for (int i = 0; i < services.Count; i++) 
                 {
                     OleDbCommand insertPackageService = new OleDbCommand();
-                    insertPackageService.Connection = connection;
+                    insertPackageService.Connection = connection.connection;
                     insertPackageService.CommandText = "INSERT INTO Package_Services (ID_Service, ID_Package) VALUES (" + services[i].id + ", " + packageID + ")";
                     
                     insertPackageService.ExecuteNonQuery();
@@ -169,7 +166,7 @@ namespace Frezersko_Studio.Forms
                     package = new CPackage(packageID, nameTxt.Text, float.Parse(priceTxt.Text), services);
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();

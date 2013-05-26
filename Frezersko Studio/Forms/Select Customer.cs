@@ -23,12 +23,11 @@ namespace Frezersko_Studio.Forms
 
         private void selectCustomer_Load(object sender, EventArgs e)
         {
-            OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=database.accdb;Persist Security Info=False;";
-            connection.Open();
+            Connection connection = new Connection();
+            connection.openConnection();
 
             OleDbCommand getCustomers = new OleDbCommand();
-            getCustomers.Connection = connection;
+            getCustomers.Connection = connection.connection;
             getCustomers.CommandText = "SELECT * FROM Customers";
 
             OleDbDataReader customersReader = getCustomers.ExecuteReader();
@@ -45,7 +44,7 @@ namespace Frezersko_Studio.Forms
                 CCustomer tmpCustomer = new CCustomer(id,first_name,last_name,address,phone,birthday);
                 customersList.Items.Add(tmpCustomer);
             }
-            connection.Close();
+            connection.closeConnection();
 
             if (customersList.Items.Count == 0) 
             {

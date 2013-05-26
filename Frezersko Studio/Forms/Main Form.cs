@@ -18,15 +18,14 @@ namespace Frezersko_Studio
         float nb_TotalPrice, ab_TotalPrice;
         int ab_TotalBills;
         CCustomer nb_Customer;
-        OleDbConnection connection;
+        Connection connection;
         List<CEmployee> e_employees;
 
         public mainForm()
         {
             InitializeComponent();
 
-            connection = new OleDbConnection();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=database.accdb;Persist Security Info=False;";
+            connection = new Connection();
 
             // Defualt Values
             nb_TotalPrice = 0.0f;
@@ -48,11 +47,11 @@ namespace Frezersko_Studio
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-            connection.Open();
+            connection.openConnection();
             // Screen 2
 
             OleDbCommand getCustomers = new OleDbCommand();
-            getCustomers.Connection = connection;
+            getCustomers.Connection = connection.connection;
 
             getCustomers.CommandText = "SELECT * FROM Customers";
             OleDbDataReader customerReader = getCustomers.ExecuteReader();
@@ -73,7 +72,7 @@ namespace Frezersko_Studio
             // Screen 3
 
             OleDbCommand getServices = new OleDbCommand();
-            getServices.Connection = connection;
+            getServices.Connection = connection.connection;
 
             getServices.CommandText = "SELECT * FROM Services";
             OleDbDataReader servicesReader = getServices.ExecuteReader();
@@ -90,7 +89,7 @@ namespace Frezersko_Studio
             }
 
             OleDbCommand getPackages = new OleDbCommand();
-            getPackages.Connection = connection;
+            getPackages.Connection = connection.connection;
             getPackages.CommandText = "SELECT * FROM Packages";
 
             OleDbDataReader packageReader = getPackages.ExecuteReader();
@@ -102,7 +101,7 @@ namespace Frezersko_Studio
                 string price = packageReader[2].ToString();
 
                 OleDbCommand getPackageServices = new OleDbCommand();
-                getPackageServices.Connection = connection;
+                getPackageServices.Connection = connection.connection;
                 getPackageServices.CommandText = "SELECT Services.ID, Service_Name, Price FROM Services, Package_Services WHERE Package_Services.ID_Package = " + id + " AND Services.ID = Package_Services.ID_Service";
 
                 OleDbDataReader packageServicesReader = getPackageServices.ExecuteReader();
@@ -124,7 +123,7 @@ namespace Frezersko_Studio
             // Screen 4
 
             OleDbCommand getEmployees = new OleDbCommand();
-            getEmployees.Connection = connection;
+            getEmployees.Connection = connection.connection;
 
             getEmployees.CommandText = "SELECT * FROM Employees";
             OleDbDataReader employeesReader = getEmployees.ExecuteReader();
@@ -145,7 +144,7 @@ namespace Frezersko_Studio
                 e_employees.Add(tmpEmployee);
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             if (c_CustomersList.Items.Count > 0)
                 c_CustomersList.SelectedIndex = 0;
@@ -379,7 +378,7 @@ namespace Frezersko_Studio
 
         private void nb_CompliteBllBtn_Click(object sender, EventArgs e)
         {
-             connection.Open();
+             connection.openConnection();
            
             // Create Bill
 
@@ -389,7 +388,7 @@ namespace Frezersko_Studio
             string userID = nb_Customer.id;
 
             OleDbCommand command = new OleDbCommand();
-            command.Connection = connection;
+            command.Connection = connection.connection;
             command.CommandText = @"INSERT INTO Bills (Bill_Date, Price, [Note], ID_Customer) VALUES (#" + date + "#, " + price + ", '" + note + "', " + userID + ")";
             command.ExecuteNonQuery();
             command.CommandText = "Select @@Identity";
@@ -422,7 +421,7 @@ namespace Frezersko_Studio
                 }
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             MessageBox.Show("The bill has been succesfully recorded!", "Bill recorded!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             nb_Customer = null;
@@ -467,10 +466,10 @@ namespace Frezersko_Studio
             if (result == System.Windows.Forms.DialogResult.Cancel)
                 return;
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand deleteService = new OleDbCommand();
-            deleteService.Connection = connection;
+            deleteService.Connection = connection.connection;
             deleteService.CommandText = "DELETE FROM Services WHERE ID = " + tmpService.id;
             
             try
@@ -500,7 +499,7 @@ namespace Frezersko_Studio
                     MessageBox.Show("Service was not deleted because of unknown error!", "Deleting Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             
-            connection.Close();
+            connection.closeConnection();
         }
 
         private void s_ServiceAdd_Click(object sender, EventArgs e)
@@ -582,10 +581,10 @@ namespace Frezersko_Studio
             if (result == System.Windows.Forms.DialogResult.Cancel)
                 return;
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand deletePackage = new OleDbCommand();
-            deletePackage.Connection = connection;
+            deletePackage.Connection = connection.connection;
             deletePackage.CommandText = "DELETE FROM Packages WHERE ID = " + tmpPackage.id;
 
             try
@@ -613,7 +612,7 @@ namespace Frezersko_Studio
                     MessageBox.Show("Package was not deleted because of unknown error!", "Deleting Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            connection.Close();
+            connection.closeConnection();
         }
 
         private void e_EmployeesList_SelectedIndexChanged(object sender, EventArgs e)
@@ -695,10 +694,10 @@ namespace Frezersko_Studio
                     return;
             }
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand fireCommand = new OleDbCommand();
-            fireCommand.Connection = connection;
+            fireCommand.Connection = connection.connection;
 
             if (tmpEmployee.fired)
             {
@@ -723,7 +722,7 @@ namespace Frezersko_Studio
                         e_employees[i].fired = true;
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             fillE_EmployeesList();
         }
@@ -736,10 +735,10 @@ namespace Frezersko_Studio
             if (result == System.Windows.Forms.DialogResult.Cancel)
                 return;
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand deleteEmployee = new OleDbCommand();
-            deleteEmployee.Connection = connection;
+            deleteEmployee.Connection = connection.connection;
             deleteEmployee.CommandText = "DELETE FROM Employees WHERE ID = " + tmpEmployee.id;
 
             try
@@ -757,7 +756,7 @@ namespace Frezersko_Studio
                     MessageBox.Show("Employee was not deleted because of unknown error!", "Deleting Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            connection.Close();
+            connection.closeConnection();
         }
 
         private void e_RefreshBtn_Click(object sender, EventArgs e)
@@ -766,10 +765,10 @@ namespace Frezersko_Studio
 
             CEmployee tmpEmployee = e_EmployeesList.SelectedItem as CEmployee;
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand getServicesCommand = new OleDbCommand();
-            getServicesCommand.Connection = connection;
+            getServicesCommand.Connection = connection.connection;
             getServicesCommand.CommandText = "SELECT * FROM Services";
 
             OleDbDataReader servicesReader = getServicesCommand.ExecuteReader();
@@ -785,7 +784,7 @@ namespace Frezersko_Studio
             }
 
             OleDbCommand getEmployeeServices = new OleDbCommand();
-            getEmployeeServices.Connection = connection;
+            getEmployeeServices.Connection = connection.connection;
             getEmployeeServices.CommandText = "SELECT ID, Bill_Date FROM Bills";
 
             OleDbDataReader billReader = getEmployeeServices.ExecuteReader();
@@ -800,7 +799,7 @@ namespace Frezersko_Studio
                     continue;
 
                 OleDbCommand getServicesForBill = new OleDbCommand();
-                getServicesForBill.Connection = connection;
+                getServicesForBill.Connection = connection.connection;
                 getServicesForBill.CommandText = "SELECT ID_Service FROM Bill_Services WHERE ID_Bill = " + billID + "AND ID_Employee = " + tmpEmployee.id;
 
                 OleDbDataReader billServiceReader = getServicesForBill.ExecuteReader();
@@ -812,7 +811,7 @@ namespace Frezersko_Studio
                 }
 
                 OleDbCommand getPServicesForBill = new OleDbCommand();
-                getPServicesForBill.Connection = connection;
+                getPServicesForBill.Connection = connection.connection;
                 getPServicesForBill.CommandText = "SELECT ID_Service FROM Bill_PServices WHERE ID_Bill = " + billID + "AND ID_Employee = " + tmpEmployee.id;
 
                 OleDbDataReader billPServiceReader = getPServicesForBill.ExecuteReader();
@@ -824,7 +823,7 @@ namespace Frezersko_Studio
                 }
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             e_ServicesList.Items.Clear();
             float tmpTotalPrice = 0;
@@ -896,10 +895,10 @@ namespace Frezersko_Studio
             if (result == System.Windows.Forms.DialogResult.Cancel)
                 return;
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand deleteEmployee = new OleDbCommand();
-            deleteEmployee.Connection = connection;
+            deleteEmployee.Connection = connection.connection;
             deleteEmployee.CommandText = "DELETE FROM Customers WHERE ID = " + tmpCustomer.id;
 
             try
@@ -934,7 +933,7 @@ namespace Frezersko_Studio
                     MessageBox.Show("Customer was not deleted because of unknown error!", "Deleting Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
-            connection.Close();
+            connection.closeConnection();
         }
 
         private void c_AddBtn_Click(object sender, EventArgs e)
@@ -968,13 +967,14 @@ namespace Frezersko_Studio
         private void c_LoadBtn_Click(object sender, EventArgs e)
         {
             c_LoadBtn.Enabled = false;
+            c_BillsList.Items.Clear();
 
             CCustomer tmpCustomer = c_CustomersList.SelectedItem as CCustomer;
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand billsCommand = new OleDbCommand();
-            billsCommand.Connection = connection;
+            billsCommand.Connection = connection.connection;
 
             billsCommand.CommandText = "SELECT * FROM Bills WHERE ID_Customer = " + tmpCustomer.id + " ORDER BY Bill_Date ASC";
             OleDbDataReader billsReader = billsCommand.ExecuteReader();
@@ -987,7 +987,7 @@ namespace Frezersko_Studio
                 string billNote = billsReader[3].ToString();
 
                 OleDbCommand billServicesCommand = new OleDbCommand();
-                billServicesCommand.Connection = connection;
+                billServicesCommand.Connection = connection.connection;
 
                 billServicesCommand.CommandText = "SELECT Services.* FROM Services, Bill_Services WHERE Bill_Services.ID_Service = Services.ID AND Bill_Services.ID_Bill = " + idBill;
                 OleDbDataReader billServicesReader = billServicesCommand.ExecuteReader();
@@ -1001,7 +1001,7 @@ namespace Frezersko_Studio
                     CService tmpSerice = new CService(idService, name, float.Parse(servicePrice));
 
                     OleDbCommand billServiceEmployeeCommand = new OleDbCommand();
-                    billServiceEmployeeCommand.Connection = connection;
+                    billServiceEmployeeCommand.Connection = connection.connection;
 
                     billServiceEmployeeCommand.CommandText = "SELECT Employees.* FROM Employees, Bill_Services WHERE Bill_Services.ID_Bill = " + idBill + " AND Bill_Services.ID_Service = " + idService + "AND Bill_Services.ID_Employee = Employees.ID";
                     OleDbDataReader billServiceEmployeeReader = billServiceEmployeeCommand.ExecuteReader();
@@ -1024,7 +1024,7 @@ namespace Frezersko_Studio
                 }
 
                 OleDbCommand billPackages = new OleDbCommand();
-                billPackages.Connection = connection;
+                billPackages.Connection = connection.connection;
 
                 billPackages.CommandText = "SELECT DISTINCT Packages.* FROM Packages, Bill_PServices WHERE Packages.ID = Bill_PServices.ID_Package AND Bill_PServices.ID_Bill = " + idBill;
                 OleDbDataReader billPackagesReader = billPackages.ExecuteReader();
@@ -1037,7 +1037,7 @@ namespace Frezersko_Studio
                     string packagePrice = billPackagesReader[2].ToString();
 
                     OleDbCommand billPackageServices = new OleDbCommand();
-                    billPackageServices.Connection = connection;
+                    billPackageServices.Connection = connection.connection;
 
                     billPackageServices.CommandText = "SELECT Services.* FROM Services, Bill_PServices WHERE Services.ID = Bill_PServices.ID_Service AND Bill_PServices.ID_Package = " + idPackage;
                     OleDbDataReader billPackageServicesReader = billPackageServices.ExecuteReader();
@@ -1051,7 +1051,7 @@ namespace Frezersko_Studio
                         CService tmpSerice = new CService(idService, name, float.Parse(servicePrice));
 
                         OleDbCommand billServiceEmployeeCommand = new OleDbCommand();
-                        billServiceEmployeeCommand.Connection = connection;
+                        billServiceEmployeeCommand.Connection = connection.connection;
 
                         billServiceEmployeeCommand.CommandText = "SELECT Employees.* FROM Employees, Bill_PServices WHERE Bill_PServices.ID_Bill = " + idBill + " AND Bill_PServices.ID_Service = " + idService + " AND Bill_PServices.ID_Employee = Employees.ID AND Bill_PServices.ID_Package = " + idPackage;
                         OleDbDataReader billServiceEmployeeReader = billServiceEmployeeCommand.ExecuteReader();
@@ -1089,7 +1089,7 @@ namespace Frezersko_Studio
             else
                 MessageBox.Show(tmpCustomer.name + " " + tmpCustomer.lastName + " doesn't have any bills yet!", "No bills found", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            connection.Close();
+            connection.closeConnection();
         }
 
         private void c_ViewBilBtn_Click(object sender, EventArgs e)
@@ -1121,10 +1121,10 @@ namespace Frezersko_Studio
             ab_TotalBills = 0;
             ab_TotalPrice = 0.0f;
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand billsCommand = new OleDbCommand();
-            billsCommand.Connection = connection;
+            billsCommand.Connection = connection.connection;
 
             billsCommand.CommandText = "SELECT * FROM Bills ORDER BY Bill_Date ASC";
             OleDbDataReader billsReader = billsCommand.ExecuteReader();
@@ -1145,7 +1145,7 @@ namespace Frezersko_Studio
                 // Get Customer
 
                 OleDbCommand customerComm = new OleDbCommand();
-                customerComm.Connection = connection;
+                customerComm.Connection = connection.connection;
                 customerComm.CommandText = "SELECT * FROM Customers WHERE ID = " + idCustomer;
 
                 OleDbDataReader customerReader = customerComm.ExecuteReader();
@@ -1160,7 +1160,7 @@ namespace Frezersko_Studio
                 CCustomer tmpCustomer = new CCustomer(cID, CFN, CLN, CA, CP, CB);
 
                 OleDbCommand billServicesCommand = new OleDbCommand();
-                billServicesCommand.Connection = connection;
+                billServicesCommand.Connection = connection.connection;
 
                 billServicesCommand.CommandText = "SELECT Services.* FROM Services, Bill_Services WHERE Bill_Services.ID_Service = Services.ID AND Bill_Services.ID_Bill = " + idBill;
                 OleDbDataReader billServicesReader = billServicesCommand.ExecuteReader();
@@ -1174,7 +1174,7 @@ namespace Frezersko_Studio
                     CService tmpSerice = new CService(idService, name, float.Parse(servicePrice));
 
                     OleDbCommand billServiceEmployeeCommand = new OleDbCommand();
-                    billServiceEmployeeCommand.Connection = connection;
+                    billServiceEmployeeCommand.Connection = connection.connection;
 
                     billServiceEmployeeCommand.CommandText = "SELECT Employees.* FROM Employees, Bill_Services WHERE Bill_Services.ID_Bill = " + idBill + " AND Bill_Services.ID_Service = " + idService + "AND Bill_Services.ID_Employee = Employees.ID";
                     OleDbDataReader billServiceEmployeeReader = billServiceEmployeeCommand.ExecuteReader();
@@ -1197,7 +1197,7 @@ namespace Frezersko_Studio
                 }
 
                 OleDbCommand billPackages = new OleDbCommand();
-                billPackages.Connection = connection;
+                billPackages.Connection = connection.connection;
 
                 billPackages.CommandText = "SELECT DISTINCT Packages.* FROM Packages, Bill_PServices WHERE Packages.ID = Bill_PServices.ID_Package AND Bill_PServices.ID_Bill = " + idBill;
                 OleDbDataReader billPackagesReader = billPackages.ExecuteReader();
@@ -1210,7 +1210,7 @@ namespace Frezersko_Studio
                     string packagePrice = billPackagesReader[2].ToString();
 
                     OleDbCommand billPackageServices = new OleDbCommand();
-                    billPackageServices.Connection = connection;
+                    billPackageServices.Connection = connection.connection;
 
                     billPackageServices.CommandText = "SELECT Services.* FROM Services, Bill_PServices WHERE Services.ID = Bill_PServices.ID_Service AND Bill_PServices.ID_Package = " + idPackage;
                     OleDbDataReader billPackageServicesReader = billPackageServices.ExecuteReader();
@@ -1224,7 +1224,7 @@ namespace Frezersko_Studio
                         CService tmpSerice = new CService(idService, name, float.Parse(servicePrice));
 
                         OleDbCommand billServiceEmployeeCommand = new OleDbCommand();
-                        billServiceEmployeeCommand.Connection = connection;
+                        billServiceEmployeeCommand.Connection = connection.connection;
 
                         billServiceEmployeeCommand.CommandText = "SELECT Employees.* FROM Employees, Bill_PServices WHERE Bill_PServices.ID_Bill = " + idBill + " AND Bill_PServices.ID_Service = " + idService + " AND Bill_PServices.ID_Employee = Employees.ID AND Bill_PServices.ID_Package = " + idPackage;
                         OleDbDataReader billServiceEmployeeReader = billServiceEmployeeCommand.ExecuteReader();
@@ -1259,7 +1259,7 @@ namespace Frezersko_Studio
                 ab_TotalPrice += tmpBill.price;
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             if (allBillsList.Items.Count == 0)
             {
@@ -1308,15 +1308,15 @@ namespace Frezersko_Studio
 
             allBillsList.Items.Remove(tmpBill);
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand deleteCommand = new OleDbCommand();
-            deleteCommand.Connection = connection;
+            deleteCommand.Connection = connection.connection;
             deleteCommand.CommandText = "DELETE FROM Bills WHERE ID = " + tmpBill.id;
 
             int n = deleteCommand.ExecuteNonQuery();
 
-            connection.Close();
+            connection.closeConnection();
 
             if (allBillsList.Items.Count == 0)
             {

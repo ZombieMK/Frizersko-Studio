@@ -62,6 +62,7 @@
     <Compile Include="Classes\CBill.cs" />
     <Compile Include="Classes\CCustomer.cs" />
     <Compile Include="Classes\CEmployee.cs" />
+    <Compile Include="Classes\Connection.cs" />
     <Compile Include="Classes\CPackage.cs" />
     <Compile Include="Classes\CService.cs" />
     <Compile Include="Forms\Select Customer.cs">

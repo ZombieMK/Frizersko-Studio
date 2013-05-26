@@ -45,13 +45,12 @@ namespace Frezersko_Studio.Forms
                 return;
             }
 
-            OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=database.accdb;Persist Security Info=False;";
+            Connection connection = new Connection();
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand serviceCommand = new OleDbCommand();
-            serviceCommand.Connection = connection;
+            serviceCommand.Connection = connection.connection;
 
             if (edit)
             {
@@ -72,7 +71,7 @@ namespace Frezersko_Studio.Forms
                 service = new CService(serviceID, nameTxt.Text, float.Parse(priceTxt.Text));
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();

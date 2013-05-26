@@ -54,13 +54,12 @@ namespace Frezersko_Studio.Forms
                 return;
             }
 
-            OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=database.accdb;Persist Security Info=False;";
+            Connection connection = new Connection();
 
-            connection.Open();
+            connection.openConnection();
 
             OleDbCommand customerCommand = new OleDbCommand();
-            customerCommand.Connection = connection;
+            customerCommand.Connection = connection.connection;
 
             string name = nameTxt.Text;
             string lastName = lastNameTxt.Text;
@@ -90,7 +89,7 @@ namespace Frezersko_Studio.Forms
                 customer = new CCustomer(idCustomer, name, lastName, address, phone, birthdayPicker.Value.Date);
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             DialogResult = System.Windows.Forms.DialogResult.OK;
             Close();

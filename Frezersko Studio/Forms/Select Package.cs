@@ -24,12 +24,12 @@ namespace Frezersko_Studio.Forms
 
         private void selectPackage_Load(object sender, EventArgs e)
         {
-            OleDbConnection connection = new OleDbConnection();
-            connection.ConnectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=database.accdb;Persist Security Info=False;";
-            connection.Open();
+            Connection connection = new Connection();
+
+            connection.openConnection();
 
             OleDbCommand getPackages = new OleDbCommand();
-            getPackages.Connection = connection;
+            getPackages.Connection = connection.connection;
             getPackages.CommandText = "SELECT * FROM Packages";
 
             OleDbDataReader packageReader = getPackages.ExecuteReader();
@@ -41,7 +41,7 @@ namespace Frezersko_Studio.Forms
                 string price = packageReader[2].ToString();
                 
                 OleDbCommand getPackageServices = new OleDbCommand();
-                getPackageServices.Connection = connection;
+                getPackageServices.Connection = connection.connection;
                 getPackageServices.CommandText = "SELECT Services.ID, Service_Name, Price FROM Services, Package_Services WHERE Package_Services.ID_Package = " + id + " AND Services.ID = Package_Services.ID_Service";
 
                 OleDbDataReader packageServicesReader = getPackageServices.ExecuteReader();
@@ -61,7 +61,7 @@ namespace Frezersko_Studio.Forms
             }
 
             OleDbCommand getEmployees = new OleDbCommand();
-            getEmployees.Connection = connection;
+            getEmployees.Connection = connection.connection;
             getEmployees.CommandText = "SELECT * FROM Employees";
 
             OleDbDataReader employeesReader = getEmployees.ExecuteReader();
@@ -82,7 +82,7 @@ namespace Frezersko_Studio.Forms
                     employeeList.Items.Add(tmpEmployee);
             }
 
-            connection.Close();
+            connection.closeConnection();
 
             if (packagesList.Items.Count == 0) 
             {
